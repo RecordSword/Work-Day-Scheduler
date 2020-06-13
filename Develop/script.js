@@ -1,15 +1,37 @@
+
+// local storage for text input
+function getLocalStorage(key) {
+    let value = localStorage.getItem(key);
+    if (value) {
+        $(`#text${key}`).text(value);
+    }
+}
+// Current date and time
+$(document).ready(function () {
     $("#currentDay").text(moment().format("dddd, MMMM Do"));
-    for (let i = 9; i < 18; i++) {
+    var currentHour = moment().hours()
+    for (let i = 8; i < 19; i++) {
 
         // create a row div
         var row = $(`<div data-time=${i} id='${i}' class="row">`);
 
         // create a column div
-        var col1 = $('<div class="col-sm-2"> <p class="hour">' + formatTime(i) + '</p>');
+        var col1 = $('<div class="col-sm-2 hour">' + i + 'am' + '</div>');
+
+        if (i > 12) {
+            var newDisplay = i - 12
+            newDisplay += 'pm'
+            col1.text(newDisplay)
+        }
 
         //create column 2 div
-        var col2 = $(`<div class="col-sm-8 past"><textarea id=text${i} class="description" placeholder="Add your event here..."></textarea>`);
-
+        var col2 = $(`<div class="col-sm-8 past"><textarea id=text${i} class="description" placeholder="Add your event here..."></textarea>`);        if (i == currentHour) {
+            col2.addClass("present");
+        } else if (currentHour > i) {
+            col2.addClass("past");
+        } else if (currentHour < i) {
+            col2.addClass('future')
+        }
         //create column 3 div
         var col3 = $(`<div class="col-sm-2"><button class="saveBtn" id=${i}><i class="far fa-save"></i></button>`)
 
@@ -18,19 +40,10 @@
         row.append(col2);
         row.append(col3);
 
-        // last step add rows to container
         $(".container").append(row);
-        
-    }
 
-
-    function formatTime(hours) {
-        var ampm = hours >= 12 ? 'pm' : 'am';
-        hours = hours % 12;
-        hours = hours ? hours : 12;
-        return hours + ampm;
+        getLocalStorage(i);
     }
-    formatTime();
 
     function updateColors() {
         var currentTime = new Date().getHours();
@@ -43,3 +56,16 @@
             }
         }
     }
+
+    setInterval(function () {
+        updateColors();
+    }, 1000);
+
+    var saveBtnEl = $('.saveBtn');
+    saveBtnEl.on('click', function () {
+        let eventId = $(this).attr('id');
+        let eventText = $(this).parent().siblings().children('.description').val();
+        localStorage.setItem(eventId, eventText);
+    });
+
+});
