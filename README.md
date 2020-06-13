@@ -2,10 +2,10 @@ An application that generates a Schedule based on a third part API known as Mome
 
 Link to code: A link to the Schedule - https://recordsword.github.io/Work-Day-Scheduler/.
 
-Screenshots: https://github.com/RecordSword/Web-APIs-Code-Quiz/blob/master/Assets/Snips/Start%20Quiz.JPG 
-https://github.com/RecordSword/Web-APIs-Code-Quiz/blob/master/Assets/Snips/Quiz%20Layout.JPG 
-https://github.com/RecordSword/Web-APIs-Code-Quiz/blob/master/Assets/Snips/Final%20Score.JPG 
-https://github.com/RecordSword/Web-APIs-Code-Quiz/blob/master/Assets/Snips/Highscores%20with%20Clear%20function.JPG
+Screenshots: 
+https://github.com/RecordSword/Work-Day-Scheduler/blob/master/snips/Title%20Card.JPG
+
+https://github.com/RecordSword/Work-Day-Scheduler/blob/master/snips/Dynamic%20colours%20for%20time%20of%20day.JPG
 
 Create a simple calendar application that allows the user to save events for each hour of the day. This app will run in the browser and feature dynamically updated HTML and CSS powered by jQuery.
 You'll need to use the Moment.js library to work with date and time. Be sure to read the documentation carefully and concentrate on using Moment.js in the browser.
